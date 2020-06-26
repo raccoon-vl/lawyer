@@ -1,0 +1,754 @@
+*{
+    box-sizing: border-box;
+}
+a{
+    text-decoration: none; /* убрали подчеркивание у всех ссылок */
+    display: inline-block; /* сделали их строчно-блочными */
+}
+ul,
+li{
+    list-style: none; /* убрали маркеры */
+    margin: 0;
+    padding: 0;
+}
+.container{
+    max-width: 1170px; /* чтоб не было нижнего скрола */
+    margin: 0 auto; /* центнрируем по ширине */
+    padding: 0 15px; /* для мобило по бокам зерезервировали пространство */
+}
+.body{
+    font-family: 'PT Serif', serif;
+    /* font-family: 'Roboto', sans-serif;  */
+    font-weight: 400px;
+    font-size: 14px;
+    line-height: 18px;
+    color: #5e5e5e;
+}
+
+
+.header{
+    font-family: 'Roboto', sans-serif;
+}
+.header__top{
+    background-color: #303030;
+}
+.header__btn,
+.footer__btn{
+    float: right; /* отправили кнопку в правый край */
+    font-size: 16px;
+    line-height: 36px;
+    background-color: #ffc222;
+    color: #1b1b1b;
+    padding: 5px 20px 4px 50px;
+    display: block;
+    position: relative;
+}
+.header__btn::before,
+.footer__btn::before{
+    font-family: 'icomoon';
+    content: "\f0b1";
+    position: absolute;
+    left: 22px;
+    color: #1b1b1b;
+}
+.header__contacts:after{ /* эта конструкция решает проблему с float и пишется только поэтому. строка теперь не сдивается вне зависимости от паддингов*/
+    content: "";
+    clear: both;
+    display: block;
+}
+.header__phone,
+.header__email,
+.footer__phone,
+.footer__email,
+.footer__point{
+    color: #d3d2d2;
+    line-height: 45px;
+    letter-spacing: 0.35px;
+    position: relative;
+}
+.header__phone{
+    padding-left: 20px;
+    padding-right: 30px;
+}
+.header__phone::before,
+.footer__phone::before{
+    font-family: 'icomoon';
+    content: "\f095";
+    position: absolute;
+    left: 0;
+    color: #ffc222;
+}
+.header__email{
+    padding-left: 24px;
+}
+.header__email::before,
+.footer__email::before{
+    font-family: 'icomoon';
+    content: "\f003";
+    position: absolute;
+    left: 0;
+    color: #ffc222;
+}
+.footer__point::before{
+    font-family: 'icomoon';
+    content: "\f041";
+    position: absolute;
+    left: 0;
+    color: #ffc222;
+    transform: translateX(40%);
+}
+.header__content{
+    padding: 34px 0 23px;
+}
+.header__content-inner{
+    display: flex;
+    justify-content: space-between;
+}
+.menu__list-item{
+    display: inline-block;
+}
+.menu__link{
+    color: #323232;
+    line-height: 36px;
+    font-size: 16px;
+    border: 1px solid transparent; /* transparent делает рамку прозрачный, но ниже прописали, чтоб при наведении курсора рамка становилась желтой */
+    padding: 0 18px;
+    transition: all .3s; /* замедляет появление рамки */
+}
+.menu__link:hover{
+    border-color: #ffc222;
+}
+.menu__list-item + .menu__list-item{
+    padding-left: 10px;
+}
+#modal{
+    display: none;
+}
+
+
+.slider{
+    background-image: url(../img/slider-head-bg.jpg);
+    background-repeat: no-repeat; /* убирает повторы картинки на больших экранах */
+    background-size: cover; /* растягивает картинку по всему экрану */
+    background-position: center; 
+    min-height: 500px;
+    position: relative;
+}
+.slider__dark-block { /* сделали затемнение на фон */
+    background: rgba(0,0,0,0.7);  
+    width: 100%;
+    height: 100%; 
+    position: absolute; 
+}
+.slider__item-content{
+    text-align: center;
+    padding-top: 110px;
+    max-width: 665px;
+    margin: 0 auto;
+}
+.slider__title{
+    font-family: 'Roboto', sans-serif;
+    /* text-transform: uppercase; */
+    color: #ffffff;
+    font-size: 30px;
+    line-height: 36px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    margin-bottom: 22px;
+}
+.slider__text{
+    color: #d3d2d2;
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 50px;
+    max-width: 610px;
+}
+.default-btn{
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.35px;
+    border: 1px solid #ffc222;
+    padding: 8px 30px 8px 24px;
+    border-right-width: 21px;
+    outline: none;
+    position: relative;
+}
+.default-btn::after{
+    font-family: 'icomoon';
+    content: "\f105";
+    color: #ffffff;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -14px;
+}
+.slider__inner{
+    position: relative;
+}
+.slick-btn{
+    position: absolute;
+    top: 70%;
+    z-index: 3;
+    font-family: 'icomoon';
+    border: 1px solid #ffffff;
+    width: 40px;
+    height: 40px;
+    color: #ffffff;
+    cursor: pointer;
+    outline: none;
+    background-color: #ffc222;
+}
+.slick-btn.slick-disabled{
+    cursor: default;
+    background-color: transparent; /* фон рамки кнопки сделали прозрачным */
+}
+.slick-btn::after{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.slick-next::after{
+    content: "\f104";
+}
+.slick-prev::after{
+    content: "\f105";
+}
+.slick-next{
+    left: 0;
+}
+.slick-prev{
+    right: 0;
+}
+
+
+.services{
+    padding: 50px 0 30px;
+}
+.services__top{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+.services__title-box{
+    max-width: 520px;
+    padding-left: 140px;
+}
+.title{
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 24px;
+    margin-bottom: 20px;
+    color: #212020;
+    position: relative;
+}
+.title::before{ /* желтая линия перед заголовком */
+    content: ""; /* всегда если есть ::before нужно это писать. без этого линия не отображается */
+    position: absolute;
+    height: 2px;
+    width: 105px;
+    background-color: #ffc222;
+    left: -138px;
+    top: 50%;
+}
+.service__text{
+    letter-spacing: 0.14px;
+    color: #5e5e5e;
+}
+.services__btn{
+    font-family: 'Roboto', sans-serif;
+    line-height: 24px;
+    letter-spacing: 0.35px;
+    padding: 5px 28px;
+    color: #373636;
+    width: 223px;
+    height: 40px;
+    border: 3px solid #e6e6e6;
+    outline: none;
+}
+.services__items{
+    display: flex;
+    justify-content: space-between;
+}
+.services__item{
+    max-width: 360px;
+    min-height: 375px;
+    box-shadow: 0 7px 24px 3px rgba(91, 89, 89, 0.14);
+    background-color: #f9f9f9;
+    padding: 30px 0 80px; /* изначально было 30px 0 40px, но увеличили до 80px, это запас для кнопки внизу */
+    text-align: center;
+    position: relative;
+}
+.services__item-title{
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 24px;
+    color: #212020;
+    padding: 24px 0;
+}
+.services__item-text{
+    color: #5e5e5e;
+    letter-spacing: 0.14px;
+    padding: 0 30px 30px;
+}
+.services__item-btn{
+    position: absolute;
+    bottom: 40px;
+    left: 0; 
+    right: 0; /* таким образом объект не знает к какому боку прижаться и встает посередине */
+}
+.services__item-btn--color{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.35px;
+    color: #373636;
+}
+.services__item-link{
+    font-family: 'Roboto', sans-serif;
+    color: #050505;
+    border-bottom: 1px solid #050505;
+    margin-right: 60px; /* отодвинулись от кнопки */
+}
+
+
+.about{
+    background-image: url(../img/about-bg.jpg);
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    background-position: center; 
+    min-height: 300px;
+    position: relative;
+}
+.about__dark-block{ /* сделали затемнение на фон */
+    background: rgba(0,0,0,0.4);  
+    width: 100%;
+    height: 100%; 
+    position: absolute; 
+}
+.about__inner{
+    max-width: 545px;
+    position: relative;
+    padding: 25px 0 45px;
+}
+.about__title{
+    padding: 10px 0 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 24px;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+.about__text{
+    line-height: 24px;
+    letter-spacing: 0.14px;
+    color: #d3d2d2;
+}
+.about__btn{
+    position: absolute;
+    top: 230px;
+}
+.about__btn::after{
+    color: #303030;
+}
+
+
+.form{
+    padding-top: 40px;
+}
+.form__title-box{
+    max-width: 520px;
+    padding-left: 140px;
+}
+.form__inner{
+    background-image: url(../img/form-woman-bg.jpg);
+    background-repeat: no-repeat;
+    min-height: 460px;
+    background-position: bottom right;
+    padding-bottom: 40px;
+}
+.form__box{
+    max-width: 850px;
+    padding-top: 45px;
+}
+.form__box-inner{
+    display: flex;
+    justify-content: space-between;
+}
+.form__box-left{
+    min-width: 265px;
+}
+.form__box-right{
+    min-width: 560px;
+}
+.form__box-inner label{
+    font-family: 'Roboto', sans-serif;
+    line-height: 36px;
+    color: #282828;
+}
+.form__box-inner input{
+    display: block;
+    width: 100%;
+    outline: none;
+    margin-bottom: 8px;
+    height: 40px;
+    padding: 0 10px;
+    border: 1px solid #e6e6e6;
+}
+.form__box-inner select{
+    height: 40px;
+    padding-left: 17px;
+    border: 1px solid #e6e6e6;
+}
+.form__box-inner .jq-selectbox.jqselect{ /* взяли эти два класса (и все остальные ниже) из отладчика после того, как вставили плагин (скрипты и линки и прописали в дж с) */
+    display: block;
+    width: 100%;
+}
+.form__box-inner .jq-selectbox__select{
+    height: 40px;
+    border: 1px solid #e6e6e6;
+    padding-left: 17px;
+}
+.form__box-inner .jq-selectbox__trigger-arrow::before{
+    font-family: 'icomoon';
+    content: "\f105";
+    color: #6b6a6a;
+    position: absolute;
+    right: 17px;
+    top: 0;
+    transform: rotate(90deg);
+}
+.form__box-inner .jq-selectbox__dropdown {
+    width: 100%;
+    margin: 2px 0 0;
+    padding: 0;
+    border: 1px solid #e6e6e6;
+    background: #FFF;
+    box-shadow: 0 2px 10px rgba(0,0,0,.2);
+}
+.form__box-inner .jq-selectbox li {
+    min-height: 18px;
+    padding: 5px 17px 6px;
+    color: #231F20;
+}
+.form__box-inner  .jq-selectbox li.selected {
+    background-color: #A3ABB1;
+    color: #FFF;
+}
+.form__box-inner  .jq-selectbox li:hover {
+    background-color: #08C;
+    color: #FFF;
+}
+.form__box-inner  .jq-selectbox li.disabled {
+    color: #AAA;
+  }
+.form__box-inner  .jq-selectbox li.disabled:hover {
+    background: none;
+}
+.form__box-inner  .jq-selectbox li.optgroup {
+    font-weight: bold;
+}
+.form__box-inner  .jq-selectbox li.optgroup:hover {
+    background: none;
+    color: #231F20;
+    cursor: default;
+}
+.form__box-inner  .jq-selectbox li.option { /* сверху вот до сюда классы взяты из отладчика после подключения темы. файл с темой удалили, потому что всё нужное перенесли в этот файл стилей */
+    padding-left: 25px;
+}
+.form__box-inner textarea{
+    display: block;
+    width: 100%;
+    outline: none;
+    border: 1px solid #e6e6e6;
+    padding: 10px;
+    height: 206px;
+    resize: none; /* убрали уголок, который может менять размер окна. чтоб пользователи не баловались */
+    margin-bottom: 45px;
+}
+.form__btn{
+    background-color: transparent;
+    color: #282828;
+    right: 0;
+    float: right;
+    cursor: pointer;
+}
+.form__btn::after{
+    color: #282828;
+}
+
+
+.skills{
+    background-image: url(../img/skills-bg.jpg);
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    background-position: center; 
+    min-height: 285px;
+    position: relative;
+}
+.skills__dark-block{
+    background: rgba(0,0,0,0.6);  
+    width: 100%;
+    height: 100%; 
+    position: absolute; 
+}
+.skills__inner{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    text-align: center;
+    padding: 55px 0 40px;
+}
+.skills__item{
+    max-width: 360px;
+    padding: 0 20px;
+}
+.skills__title{
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 500;
+    color: #ffffff;
+    padding: 60px 0 15px;
+    position: relative;
+}
+.skills__title::before{
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #ffc222;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.skills__title::after{
+    position: absolute;
+    font-family: 'icomoon';
+    content: "\f00c";
+    color: #ffffff;
+    top: 9px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.skills__text{
+    line-height: 24px;
+    color: #d3d2d2;
+    letter-spacing: 0.14px;
+}
+
+
+.news{
+    padding: 55px 0 110px;
+    background-color: #f9f9f9;
+}
+.news__top{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+.news__title-box{
+    max-width: 520px;
+    padding-left: 140px;
+}
+.news__text{
+    letter-spacing: 0.14px;
+    color: #5e5e5e;
+}
+.news__btn{
+    font-family: 'Roboto', sans-serif;
+    line-height: 24px;
+    letter-spacing: 0.35px;
+    padding: 5px 24px;
+    color: #373636;
+    width: 223px;
+    height: 40px;
+    border: 3px solid #e6e6e6;
+    outline: none;
+}
+.news__inner{
+    display: flex;
+    justify-content: space-between;
+}
+.news__blog{
+    max-width: 260px;
+}
+.news__image{
+    position: relative;
+}
+.news__date{
+    position: absolute;
+    width: 47px;
+    height: 54px;
+    text-align: center;
+    background-color: #ffc222;
+    color: #f9f9f9;
+    padding-top: 30px;
+    font-weight: 700;
+    top: 0;
+    left: 10px;
+}
+.news__blog-title{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    color: #242424;
+    padding: 20px 0 15px;
+    position: relative;
+}
+.news__blog-text{
+    color: #5e5e5e;
+}
+.news__inner{
+    display: flex;
+    justify-content: space-between;
+}
+.news__slider{
+    max-width: 555px;
+    width: 100%;
+    box-shadow: 0 5px 15px 1px rgba(128, 127, 127, 0.13);
+    background-color: #ffffff;
+    padding: 60px 35px 50px 70px;
+    position: relative;
+}
+.news__slider::before{
+    position: absolute;
+    font-family: 'icomoon';
+    content: "\f10e";
+    background-color: #ffc222;
+    color: #ffffff;
+    font-size: 16px;
+    width: 65px;
+    height: 31px;
+    text-align: center;
+    line-height: 30px;
+    top: 0;
+}
+.news__slider-title{
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0.9px;
+    color: #242424;
+    max-width: 366px;
+    margin-bottom: 15px;
+}
+.news__slider-text{
+    color: #5e5e5e;
+    margin-bottom: 30px;
+}
+.news__slider-author{
+    font-family: 'Roboto', sans-serif;
+    color: #212020;
+    font-size: 14px;
+}
+.news__slider-inner .slick-btn{
+    top: auto;
+    bottom: -110px;
+}
+.news__slider-inner .slick-next{
+    left: auto;
+    right: 20px;
+}
+.news__slider-inner .slick-prev{
+    right: -35px;
+}
+.news__slider-inner .slick-btn.slick-disabled{
+    cursor: default;
+    background-color: transparent; /* фон рамки кнопки сделали прозрачным */
+    border: 1px solid #dadada;
+    color: #908e8e;
+}
+
+
+.footer__content{
+    background-color: #595959;
+    padding: 20px 0 30px;
+}
+.footer__inner{
+    display: flex;
+    justify-content: space-between;
+}
+.footer__info{
+    max-width: 345px;
+}
+.footer__title{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 36px;
+    letter-spacing: 0.8px;
+    color: #ffffff;
+}
+.footer__text{
+    font-size: 14px;
+    line-height: 18px;
+    color: #d3d2d2;
+    margin-bottom: 20px;
+}
+.footer__btn{
+    float: none;
+    display: inline-block;
+}
+.footer__map{
+    padding-top: 10px;
+    max-width: 630px;
+    width: 100%;
+}
+.footer__map iframe{
+   width: 100%;
+}
+.footer__point,
+.footer__email,
+.footer__phone{
+    padding-left: 35px;
+    line-height: 30px;
+}
+.footer__list{
+    padding-top: 10px;
+}
+.footer__list li{
+    margin-top: 10px;
+}
+.footer__copy{
+    height: 45px;
+    background-color: #303030;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    line-height: 45px;
+    letter-spacing: 0.6px;
+    color: #d3d2d2;
+    text-align: center;
+}
+
+
+#modal{
+    width: 300px;
+}
+#modal input{
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+    outline: none;
+    height: 40px;
+    padding: 0 10px;
+    border: 1px solid #e6e6e6;
+    font-family: 'Roboto', sans-serif;
+}
+#modal input[type="submit"]{
+    background-color: #ffc222;
+    border: none;
+}
+
+
+.header__btn-menu{ /* кнопка-гамбургер в мобильной версии. для большого экрана отключили */
+    display: none;
+    font-size: 28px;
+    color: #303030;
+}
